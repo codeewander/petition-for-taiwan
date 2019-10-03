@@ -1,0 +1,26 @@
+.tip {
+  position: relative;
+  display: inline-block;
+  width:15px;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tip-text {
+  visibility: hidden;
+  width: 250px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  padding: 5px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 15%;
+  font-size: 12px;
+}
+
+.tip:hover .tip-text {
+  visibility: visible;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./signin.css">
+  <title>SignIn</title>
+</head>
+<body>
+  <form action="https://epetitionen.bundestag.de/epet/registrieren.form.html" method="post" id="mainform">
+    <div class="container">
+        <fieldset>
+            <legend>帳戶資訊</legend>
+        <div class="form-group">
+            <label for="email">E-mail*
+             </label>
+            <input class="form-control" type="text" name="email" id="email" value="" placeholder="請填入E-mail">
+        </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="passwort">密碼*
+            <img class="tip" src="/tip.svg">
+            <span class="tip-text">1. 密碼必須含有至少一個大寫和小寫字母以及一個數字或特殊符號<br>2. 長度至少超過8個字元</span>
+          </label>
+          <input class="form-control" autocomplete="off" type="password" id="passwort">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="passwort_wiederholen">確認密碼*</label>
+          <input class="form-control" autocomplete="off" type="password" id="passwort_wiederholen" placeholder="請再次輸入密碼">
+        </div>
+      </div>
+      <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="datenschutz_ok" name="datenschutz_ok" class="checkbox" value="1">
+            <label class="form-check-label" for="datenschutz_ok">
+                了解並閱讀隱私政策*
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input"type="checkbox" id="nutzungsbed_ok" name="nutzungsbed_ok" class="checkbox" value="1"><label for="nutzungsbed_ok">
+              <label class="form-check-label" for="nutzungsbed_ok">
+                  同意使用條款*
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>個人資訊</legend>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="vorname">名字*</label>
+                <input class="form-control" type="text" name="vorname" id="vorname" value="" placeholder="">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="nachname">姓氏*</label>
+                <input  class="form-control" type="text" name="nachname" id="nachname" value="" placeholder="">
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="str_nr">地址*</label>
+                <input type="text" class="form-control" name="str_nr" id="str_nr"
+                placeholder="請輸入行政區域/街道名/門牌號碼">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="ort">城市*</label>
+                  <input type="text" class="form-control"name="ort" id="ort" >
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="land">國家*</label>
+                  <select name="land" id="land" class="form-control">
+                      <option value="TW">TW - 台灣</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="plz">郵遞區號*</label>
+                  <input class="form-control"  type="text" name="plz" id="plz">
+                </div>
+              </div>
+        </fieldset>
+        <input class="timestamp" type="hidden" name="sectimestamp" value="">
+        <input type="hidden" name="_charset_" value="UTF-8">
+        <input type="hidden" name="JavaScriptEnable" id="JavaScriptEnable" value="true">
+        <button type="submit" name="btAbsendenMitRegistrieren" value="Jetzt registrieren">送出</button>
+    </div>
+  </form>
+
+  <script src="./time.js"></script>
+</body>
+</html>
