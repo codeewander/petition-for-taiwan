@@ -1,9 +1,15 @@
-.form-container{
-  display: flex;
-  justify-content: center;
-  text-align: left;
-  flex-wrap: wrap;
+#petition-page .petition-name{
+  text-align: left
 }
-.form-container .header{
-  text-align:center;
+
+#petition-page .petition-btn{
+  color: #fff549;
+  background-color: #000;
+  margin-top: 20px;
+}
+.petition-way{
+  text-align: left
+}
+.radio-text{
+  padding-left:5px;
 }

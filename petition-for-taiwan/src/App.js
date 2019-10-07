@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Homepage from './Homepage'
 import SignIn from './SignIn'
 import ConfirmMail from './ConfirmMail'
-import LogIn from './LogIn'
+import Register from './Register'
 
 class App extends React.Component{
   render(){
@@ -11,9 +11,9 @@ class App extends React.Component{
       <Router>
       <Switch>
       <Route exact path="/" component={Homepage} />
-      <Route path="/step1" component={SignIn} />
+      <Route path="/step1" component={Register} />
       <Route path="/step2" component={ConfirmMail} />
-      <Route path="/step3" component={LogIn} />
+      <Route path="/step3" component={SignIn} />
       </Switch>
       </Router>
     )
