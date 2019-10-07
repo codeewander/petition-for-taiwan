@@ -12,3 +12,15 @@
   font-size: calc(10px + 2vmin);
   color: #000;
 }
+.petition-button{
+  display:inline-block;
+  color: #fff549;
+  background-color: #000;
+  padding:10px 20px;
+  border-radius: 5px;
+  width:200px;
+  text-align: center;
+  &:hover{
+    color: #fff
+  }
+}

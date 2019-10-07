@@ -1,11 +1,20 @@
 import React from 'react';
 import './styles/LogIn.scss';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button, Form, Grid, Header, Image, Message, Segment,Radio } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment,Radio } from 'semantic-ui-react'
+import axios from 'axios';
 
 class LogIn extends React.Component{
-  state = {}
-  handleChange = (e, { value }) => this.setState({ value })
+  constructor(){
+    super()
+    this.state = {
+
+    }
+  }
+  handleChange = (event) => {
+    // this.setState({
+    //   [name]: event.target.value
+    // })
+  }
   render(){
     return(
       <Grid id="petition-page" textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -15,19 +24,18 @@ class LogIn extends React.Component{
       </Header>
       <Form size='large'>
         <Segment stacked>
-          <Form.Input fluid icon='user' name="email" iconPosition='left' placeholder='請輸入註冊信箱' value="" />
+          <Form.Input fluid icon='user' name="email" iconPosition='left' placeholder='請輸入註冊信箱' />
           <Form.Input
             fluid
             icon='lock'
             iconPosition='left'
             placeholder='請輸入密碼'
             type='password'
-            ame="passwort"
+            autoComplete="false"
+            name="passwort"
           />
-          <Form className="petition-name">
-          <Form.Field>
-          選擇連署方式：
-        </Form.Field>
+          <div className="petition-way">
+          <Header as='h4' color='black' textAlign='left'>選擇連署方式：</Header>
         <Form.Field>
           <Radio
             label='我想在請願名單列表中列出全名和姓氏'
@@ -46,7 +54,7 @@ class LogIn extends React.Component{
             onChange={this.handleChange}
           />
         </Form.Field>
-        </Form>
+        </div>
           <Button className="petition-btn" fluid size='large'>
            送出連署
           </Button>

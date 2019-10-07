@@ -1,10 +1,8 @@
 import React from 'react';
-import * as moment from 'moment'
 import './styles/Homepage.scss';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import SignIn from './SignIn.js';
-import LogIn from './LogIn.js';
-
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Button} from 'semantic-ui-react'
 class Homepage extends React.Component {
   constructor(){
     super()
@@ -12,14 +10,25 @@ class Homepage extends React.Component {
       countDownDays: 0,
       countDownHours: 0,
       countDownMinutes:0,
-      currentStep: 0,
+      petitionNumber: 0,
+      isLoaded: false
     })
   }
   componentDidMount(){
     setInterval(this.countDownTimer, 1000)
+    axios.get(`https://germany-diplomatic-petition.appspot.com/petition`)
+      .then(res => {
+        // const jsonFormat = res.json();
+        const data = res.data
+        const petitionNumber = data.petition_count
+        this.setState({
+          petitionNumber: petitionNumber,
+          isLoaded: true
+        });
+      })
   }
 
-  countDownTimer = ()=>{
+  countDownTimer = () =>{
     const countDownDate = new Date("Oct 10, 2019 00:00:00 GMT+02:00").getTime()
     let now = new Date().getTime()
     let distance = countDownDate - now
@@ -29,30 +38,34 @@ class Homepage extends React.Component {
     this.setState({
       countDownDays: days,
       countDownHours: hours,
-      countDownMinutes:minutes
+      countDownMinutes:minutes,
     })
   }
-
+  nextStep = () =>{
+    let currentStep = this.step.currentStep
+    currentStep++
+    this.setState({
+      currentStep: currentStep
+    })
+  }
   render() {
-    const {countDownDays,countDownHours,countDownMinutes} = this.state
-    const home = (
+    const {countDownDays,countDownHours,countDownMinutes, petitionNumber, isLoaded} = this.state
+    let petitionData;
+    if(isLoaded === false){
+      petitionData = (<span>抓取中...</span>)
+    }else{
+      petitionData = (<span>{petitionNumber}</span>)
+    }
+    return(
       <div className="App-header">
         <h1>自己的外交自己救</h1>
         <p><span>倒數</span>{countDownDays} 天 {countDownHours} 小時 {countDownMinutes} 分鐘 </p>
-        <Link to="/step1">開始連署</Link>
+          <Link className="petition-button" to="/step1" >開始連署</Link>
+        <h2>目前連署人數：{petitionData}</h2>
       </div>
     )
-    return(
-    <Router>
-    <div className="App">
-      {/* {home} */}
-      <SignIn />
-      {/* <LogIn/> */}
-    </div>
-    <Route path="/step1" component={SignIn} />
-    <Route path="/step3" component={LogIn} />
-    </Router>
-    )}
+
+  }
 }
 
 export default Homepage;
