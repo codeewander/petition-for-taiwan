@@ -22,6 +22,9 @@ class Register extends React.Component{
       land:'TW',
       plz:'',
       sectimestamp:'',
+      isLoading: false,
+      responseMessage:'',
+      registerSuccess: false
     }
   }
   componentDidMount(){
@@ -30,7 +33,7 @@ class Register extends React.Component{
   getTimeStamp =()=>{
     let now = new Date().getTime()
     this.setState({
-      setTimestamp: now
+      sectimestamp: now
     })
   }
   handleChange = event => {
@@ -41,8 +44,18 @@ class Register extends React.Component{
     console.log(this.state)
   }
 
+  handleModal = ()=>{
+    let loadingStatus = this.state.isLoading
+    this.setState({
+      isLoading:!loadingStatus
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({
+      isLoading: true
+    })
     const user = {
       email: this.state.email,
       passwort:this.state.passwort,
@@ -56,41 +69,63 @@ class Register extends React.Component{
       land:this.state.land,
       plz:this.state.plz,
       sectimestamp:this.state.sectimestamp,
+      _charset_:'UTF-8',
+      JavaScriptEnable:true,
+      btAbsendenMitRegistrieren:"Jetzt registrieren"
     };
-    let params = new URLSearchParams();
-    params.append("email", user.email);
-    params.append("passwort", user.passwort);
-    params.append("passwort_wiederholen", user.passwort_wiederholen);
-    params.append("datenschutz_ok", user.datenschutz_ok);
-    params.append("nutzungsbed_ok", user.nutzungsbed_ok);
-    params.append("vorname", user.vorname);
-    params.append("nachname", user.nachname);
-    params.append("str_nr", user.str_nr);
-    params.append("ort", user.ort);
-    params.append("land", user.land);
-    params.append("plz", user.plz);
-    params.append("sectimestamp", user.sectimestamp);
-    params.append("_charset_", 'UTF-8');
-    params.append("JavaScriptEnable", true);
-    params.append("btAbsendenMitRegistrieren", "Jetzt registrieren");
 
-    axios.post('https://germany-diplomatic-petition.appspot.com/register',params).then(res=> {
-      if('email' in res.data && res.data.email.includes("格式") ){
-        alert('註冊失敗!' + res.data.email)
-      }else if('passwort' in res.data &&res.data.passwort.includes("格式")){
-        alert('註冊失敗!' + res.data.passwort)
-      }else if('passwort_wiederholen' in res.data && res.data.passwort_wiederholen.includes('確認密碼')){
-        alert('註冊失敗!' + res.data.passwort_wiederholen)
-      }else if(res.data.message && res.data.message.includes('error')){
-        alert('註冊失敗，請確認信箱是否已經註冊過')
+    axios.post('https://germany-diplomatic-petition.appspot.com/register',user).then(res=> {
+      console.log(res)
+      if('email' in res.data){
+        this.setState({
+          errorMessage: res.data.email
+        })
+      }else if('passwort' in res.data ){
+        this.setState({
+          errorMessage: res.data.passwort
+        })
+      }else if('passwort_wiederholen' in res.data ){
+        this.setState({
+          errorMessage: res.data.passwort_wiederholen
+        })
+      }else if(res.data.message && res.data.message.includes('registered')){
+        this.setState({
+          errorMessage: '請確認信箱是否已經註冊過'
+        })
+      }else if(res.data.message && res.data.message.includes('successfully')){
+        this.setState({
+          registerSuccess: true
+        })
+        setTimeout(() => {
+          this.props.history.push("/step2")
+        }, 2000);
       }else{
-        alert('註冊成功！')
-        this.props.history.push("/step2")
+        this.setState({
+          errorMessage: res.data.message
+        })
       }
     }
     ).catch(error=>console.log(error))
    }
   render(){
+    let modalContent;
+    const{errorMessage,isLoading,registerSuccess} = this.state;
+    if(isLoading && registerSuccess){
+      modalContent =(<React.Fragment>
+        <Icon name="thumbs up outline" size="huge" color="yellow"/>
+        <p className="model-text">註冊成功！</p>
+      </React.Fragment>)
+    }else if(isLoading && !errorMessage){
+      modalContent =(<React.Fragment>
+        <Icon loading name='spinner' color='yellow' size='huge'/>
+          <p className="model-text">處理中...</p>
+      </React.Fragment>)
+    } else if(isLoading && errorMessage){
+      modalContent =(<React.Fragment>
+        <Icon name="times circle" size='huge' color='yellow'/>
+        <p className="model-text">註冊失敗 :{errorMessage}</p>
+      </React.Fragment>)
+    }
     const countryOptions = [
       { key: 'TW', value: 'TW', text: '台灣' }
     ]
@@ -101,7 +136,7 @@ class Register extends React.Component{
           Step 1 : 立即註冊
         </Header>
         <Form size='large' className="form-container" onSubmit={this.handleSubmit}>
-          <Segment stacked style={{margin: '1rem'}}>
+          <Segment stacked style={{margin: '1rem',height:'430px',width: '480px'}}>
           <Header as='h3'>帳戶資訊</Header>
           <Form.Field required>
             <label htmlFor="email">E-mail</label>
@@ -131,7 +166,7 @@ class Register extends React.Component{
       <Checkbox name="nutzungsbed_ok" value="1" label='同意使用條款' checked/>
     </Form.Field>
           </Segment>
-          <Segment stacked>
+          <Segment stacked style={{minHeight:'430px', width:'480px'}}>
           <Header as='h3'>個人資訊<span style={{fontSize:"14px"}}>(請使用英文填寫)</span></Header>
           < Form.Group widths='equal'>
           <Form.Field required>
@@ -160,11 +195,17 @@ class Register extends React.Component{
             <input type="text" name="plz" placeholder="" onChange={this.handleChange} required/>
           </Form.Field>
           </Segment>
-        <Button style={{width:'200px',margin:'0 auto',backgroundColor:'#000',color:'#fff549'}} className="signin-btn" fluid size='large'
+        <Button style={{width:'200px',margin:'0 200px',backgroundColor:'#000',color:'#fff549'}} className="signin-btn" fluid size='large'
         type="submit" >
              送出註冊
             </Button>
         </Form>
+        <div className="modal" style={{visibility: this.state.isLoading? "visible":"hidden"}}>
+          <div className="modal-content">
+            <Icon name="close" className="modal-close" size="small" onClick={this.handleModal} circular inverted/>
+            {modalContent}
+          </div>
+          </div>
       </Grid.Column>
     </Grid>
     )

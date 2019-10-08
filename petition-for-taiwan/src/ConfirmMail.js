@@ -16,7 +16,7 @@ class ConfirmMail extends React.Component{
       <Form size='large'>
         <Segment stacked>
         <Image src={mail} size='small' style={{margin:'0 auto'}}/>
-        <p style={{fontSize:'20px',marginTop:'1em'}}>請前往註冊信箱收取<span style={{color: 'red'}}>官方確認信(德文)</span>，並點擊信件內中的超連結來啟動帳號</p>
+        <p style={{fontSize:'20px',marginTop:'1em'}}>請前往註冊信箱收取<span style={{color: 'red'}}>官方確認信(德文)</span>(需等待2-3分鐘)，並點擊信件內中的超連結來啟動帳號</p>
         <Link to="/step3" ><Button className="petition-btn" fluid size='large'>
          確認完畢
           </Button></Link>
