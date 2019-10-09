@@ -1,3 +1,24 @@
+.column {
+  width: 1024px;
+  background-color: #fff549;
+
+}
+
+h2 {
+  display: block;
+  width: 250px;
+  height: 110px;
+  background-image: url(../images/fill-14.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100%;
+  color: #fff;
+}
+.ui.segment{
+  border: none;
+}
+
+
 #petition-page .petition-name{
   text-align: left
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import './styles/Register.scss';
 import { BrowserRouter as Switch, Link } from "react-router-dom";
 import { Button, Form, Grid, Header, Segment,Checkbox, Select,Icon,Popup } from 'semantic-ui-react'
+import './styles/Register.scss';
 import axios from 'axios';
 import {withRouter} from "react-router-dom";
 
@@ -117,18 +117,23 @@ class Register extends React.Component{
     const{responseMessage,isLoading,registerSuccess} = this.state;
     if(isLoading && registerSuccess){
       modalContent =(<React.Fragment>
-        <Icon name="thumbs up outline" size="huge" color="yellow"/>
+        <Icon name="thumbs up outline" size="huge" color="#fff549"/>
         <p className="model-text">註冊成功！</p>
       </React.Fragment>)
     }else if(isLoading && !responseMessage){
       modalContent =(<React.Fragment>
-        <Icon loading name='spinner' color='yellow' size='huge'/>
+        <Icon loading name='spinner' color='#fff549' size='huge'/>
           <p className="model-text">處理中...</p>
       </React.Fragment>)
     } else if(isLoading && responseMessage){
       modalContent =(<React.Fragment>
+<<<<<<< HEAD
         <Icon name="times circle" size='huge' color='yellow'/>
         <p className="model-text">註冊失敗 :{responseMessage}</p>
+=======
+        <Icon name="times circle" size='huge' color='#fff549'/>
+        <p className="model-text">註冊失敗 :{errorMessage}</p>
+>>>>>>> 40f4b22d08dcb278d51525e0776c984d800bc8ae
       </React.Fragment>)
     }
     const countryOptions = [
@@ -136,12 +141,12 @@ class Register extends React.Component{
     ]
     return(
       <Grid id="registration-page" textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-      <Grid.Column style={{  border: '1px solid #000', borderRadius:'5px'}}>
-        <Header as='h2' color='black' textAlign='center' style={{marginTop:'20px'}}>
+      <Grid.Column style={{ borderRadius:'5px', maxWidth: '1024px'}}>
+        <Header as='h2' color='black' textAlign='center' style={{marginTop:'20px',paddingTop: '30px',color :'#fff' }}>
           Step 1 : 立即註冊
         </Header>
-        <Form size='large' className="form-container" onSubmit={this.handleSubmit} >
-          <Segment stacked style={{margin: '1rem',height:'430px',width: '480px'}}>
+        <Form size='large' className="form-container" onSubmit={this.handleSubmit} style={{background: 'transparent'}}>
+          <Segment stacked style={{margin: '1rem',height:'430px',width: '480px', backgroundColor: 'rgba(255,255,255,0.2)'}}>
           <Header as='h3'>帳戶資訊</Header>
           <Form.Field required>
             <label htmlFor="email">E-mail</label>
@@ -171,7 +176,7 @@ class Register extends React.Component{
       <Checkbox name="nutzungsbed_ok" value="1" label='同意使用條款' checked/>
     </Form.Field>
           </Segment>
-          <Segment stacked style={{minHeight:'430px', width:'480px'}}>
+          <Segment stacked style={{minHeight:'430px', width:'480px', backgroundColor: 'rgba(255,255,255,0.2)'}}>
           <Header as='h3'>個人資訊<span style={{fontSize:"14px"}}>(請使用英文填寫)</span></Header>
           < Form.Group widths='equal'>
           <Form.Field required>

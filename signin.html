@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="./signin.css">
+  <link rel="stylesheet" href="./style.css">
   <title>SignIn</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="email">E-mail*
              </label>
-            <input class="form-control" type="text" name="email" id="email" value="" placeholder="請填入E-mail">
+            <input class="form-control" type="text" name="email" id="email" value="" placeholder="請填入未註冊的E-mail">
         </div>
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -24,11 +24,11 @@
             <img class="tip" src="/tip.svg">
             <span class="tip-text">1. 密碼必須含有至少一個大寫和小寫字母以及一個數字或特殊符號<br>2. 長度至少超過8個字元</span>
           </label>
-          <input class="form-control" autocomplete="off" type="password" id="passwort">
+          <input class="form-control" autocomplete="off" type="password" name="passwort" placeholder="請設定符合規格的密碼" value="">
         </div>
-        <div class="form-group col-md-6">
+         <div class="form-group col-md-6">
           <label for="passwort_wiederholen">確認密碼*</label>
-          <input class="form-control" autocomplete="off" type="password" id="passwort_wiederholen" placeholder="請再次輸入密碼">
+          <input class="form-control" autocomplete="off" type="password" name="passwort_wiederholen" placeholder="請再次輸入密碼" value="">
         </div>
       </div>
       <div class="form-group">
