@@ -1,7 +1,7 @@
 import React from 'react';
-import './styles/SignIn.scss';
-import { Button, Form, Grid, Header, Segment, Icon } from 'semantic-ui-react'
 import axios from 'axios';
+import { Button, Form, Grid, Header, Segment, Icon } from 'semantic-ui-react'
+import './styles/SignIn.scss';
 
 class SignIn extends React.Component{
   constructor(){
@@ -96,20 +96,20 @@ class SignIn extends React.Component{
     const {isLoading,result} = this.state
     if(isLoading && !result){
       loadingContent =(<React.Fragment>
-        <Icon loading name='spinner' color='yellow' size='huge'/>
+        <Icon loading name='spinner' color='#fff549' size='huge'/>
           <p>處理中...</p>
       </React.Fragment>)
     }else if(isLoading && result === "fail"){
       loadingContent =(
         <React.Fragment>
-        <Icon name="times circle" size='huge' color='yellow'/>
+        <Icon name="times circle" size='huge' color='#fff549'/>
         <p className="model-text">連署失敗，請重新確認註冊信箱及密碼</p>
       </React.Fragment>
       )
     }else if(isLoading && result === "success"){
       loadingContent =(
         <React.Fragment>
-          <Icon name="thumbs up outline" size="huge" color="yellow"/>
+          <Icon name="thumbs up outline" size="huge" color="#fff549"/>
         <p className="model-text">連署成功！謝謝你的一份心意</p>
         <p>目前連署人數為：{this.state.petitionNumber}</p>
       </React.Fragment>
@@ -117,12 +117,12 @@ class SignIn extends React.Component{
     }
     return(
       <Grid id="petition-page" textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 , border: '1px solid #000', borderRadius:'5px'}}>
-      <Header as='h2' color='black' textAlign='center'>
+    <Grid.Column style={{ width:'480px', borderRadius:'5px'}}>
+      <Header as='h2' color='black' textAlign='center' style={{marginTop:'20px',paddingTop: '30px',color :'#fff' }}>
         Step 3 : 立即連署
       </Header>
       <Form size='large' onSubmit={this.handleSubmit}>
-        <Segment stacked>
+        <Segment stacked style={{backgroundColor: 'rgba(255,255,255,0.2)'}}>
           <Form.Input fluid icon='user' name="email" iconPosition='left' placeholder='請輸入註冊信箱' onChange={this.handleChange} required />
           <Form.Input
             fluid

@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles/Homepage.scss';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Button} from 'semantic-ui-react'
+import './styles/Homepage.scss';
 class Homepage extends React.Component {
   constructor(){
     super()
@@ -59,9 +59,11 @@ class Homepage extends React.Component {
     return(
       <div className="App-header">
         <h1>自己的外交自己救</h1>
-        <p><span>倒數</span>{countDownDays} 天 {countDownHours} 小時 {countDownMinutes} 分鐘 </p>
+        <div className="reason">德國國會可通過要求德國政府與臺灣建立正式外交關係，請願內容將予以公開後於國會討論，惟其先決條件須在4週內（自2019年9月11日起計至10月10日止）獲得全球5萬人以上之連署。</div>
+        <p className='count-down'><span>倒數</span>{countDownDays} 天 {countDownHours} 小時 {countDownMinutes} 分鐘 </p>
           <Link className="petition-button" to="/step1" >開始連署</Link>
-        <h2>目前連署人數：{petitionData}</h2>
+        <h3>目前連署人數：{petitionData}</h3>
+        
       </div>
     )
 
