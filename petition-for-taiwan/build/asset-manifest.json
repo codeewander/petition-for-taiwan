@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c676cd9e.chunk.css",
+    "main.js": "/static/js/main.17e4de74.chunk.js",
+    "main.js.map": "/static/js/main.17e4de74.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6fcc4c2b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6fcc4c2b.js.map",
+    "static/css/2.bc4837a2.chunk.css": "/static/css/2.bc4837a2.chunk.css",
+    "static/js/2.56ded4fc.chunk.js": "/static/js/2.56ded4fc.chunk.js",
+    "static/js/2.56ded4fc.chunk.js.map": "/static/js/2.56ded4fc.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.df0108283d36d138a1480c078396ab18.js": "/precache-manifest.df0108283d36d138a1480c078396ab18.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.bc4837a2.chunk.css.map": "/static/css/2.bc4837a2.chunk.css.map",
+    "static/css/main.c676cd9e.chunk.css.map": "/static/css/main.c676cd9e.chunk.css.map",
+    "static/media/Homepage.scss": "/static/media/fill-10.185f0cf0.png",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/SignIn.scss": "/static/media/fill-14.985203ef.png",
+    "static/media/mail.svg": "/static/media/mail.15bf3778.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6fcc4c2b.js",
+    "static/css/2.bc4837a2.chunk.css",
+    "static/js/2.56ded4fc.chunk.js",
+    "static/css/main.c676cd9e.chunk.css",
+    "static/js/main.17e4de74.chunk.js"
+  ]
+}
