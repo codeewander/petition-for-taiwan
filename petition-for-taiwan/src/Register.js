@@ -127,13 +127,8 @@ class Register extends React.Component{
       </React.Fragment>)
     } else if(isLoading && responseMessage){
       modalContent =(<React.Fragment>
-<<<<<<< HEAD
-        <Icon name="times circle" size='huge' color='yellow'/>
-        <p className="model-text">註冊失敗 :{responseMessage}</p>
-=======
         <Icon name="times circle" size='huge' color='#fff549'/>
-        <p className="model-text">註冊失敗 :{errorMessage}</p>
->>>>>>> 40f4b22d08dcb278d51525e0776c984d800bc8ae
+        <p className="model-text">註冊失敗 :{responseMessage}</p>
       </React.Fragment>)
     }
     const countryOptions = [
