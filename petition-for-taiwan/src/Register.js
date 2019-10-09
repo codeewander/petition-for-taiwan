@@ -41,20 +41,25 @@ class Register extends React.Component{
     this.setState({
       [name]: event.target.value
     });
-    console.log(this.state)
   }
 
   handleModal = ()=>{
     let loadingStatus = this.state.isLoading
+
     this.setState({
-      isLoading:!loadingStatus
+      isLoading:!loadingStatus,
+      responseMessage:'',
+      registerSuccess: null,
+      email:'',
+      passwort:'',
+      passwort_wiederholen:'',
     })
   }
 
   handleSubmit = event => {
     event.preventDefault();
     this.setState({
-      isLoading: true
+      isLoading: true,
     })
     const user = {
       email: this.state.email,
@@ -78,19 +83,19 @@ class Register extends React.Component{
       console.log(res)
       if('email' in res.data){
         this.setState({
-          errorMessage: res.data.email
+          responseMessage: res.data.email
         })
       }else if('passwort' in res.data ){
         this.setState({
-          errorMessage: res.data.passwort
+          responseMessage: res.data.passwort
         })
       }else if('passwort_wiederholen' in res.data ){
         this.setState({
-          errorMessage: res.data.passwort_wiederholen
+          responseMessage: res.data.passwort_wiederholen
         })
       }else if(res.data.message && res.data.message.includes('registered')){
         this.setState({
-          errorMessage: '請確認信箱是否已經註冊過'
+          responseMessage: '請確認信箱是否已經註冊過'
         })
       }else if(res.data.message && res.data.message.includes('successfully')){
         this.setState({
@@ -101,7 +106,7 @@ class Register extends React.Component{
         }, 2000);
       }else{
         this.setState({
-          errorMessage: res.data.message
+          responseMessage: res.data.message
         })
       }
     }
@@ -109,21 +114,21 @@ class Register extends React.Component{
    }
   render(){
     let modalContent;
-    const{errorMessage,isLoading,registerSuccess} = this.state;
+    const{responseMessage,isLoading,registerSuccess} = this.state;
     if(isLoading && registerSuccess){
       modalContent =(<React.Fragment>
         <Icon name="thumbs up outline" size="huge" color="yellow"/>
         <p className="model-text">註冊成功！</p>
       </React.Fragment>)
-    }else if(isLoading && !errorMessage){
+    }else if(isLoading && !responseMessage){
       modalContent =(<React.Fragment>
         <Icon loading name='spinner' color='yellow' size='huge'/>
           <p className="model-text">處理中...</p>
       </React.Fragment>)
-    } else if(isLoading && errorMessage){
+    } else if(isLoading && responseMessage){
       modalContent =(<React.Fragment>
         <Icon name="times circle" size='huge' color='yellow'/>
-        <p className="model-text">註冊失敗 :{errorMessage}</p>
+        <p className="model-text">註冊失敗 :{responseMessage}</p>
       </React.Fragment>)
     }
     const countryOptions = [
@@ -135,12 +140,12 @@ class Register extends React.Component{
         <Header as='h2' color='black' textAlign='center' style={{marginTop:'20px'}}>
           Step 1 : 立即註冊
         </Header>
-        <Form size='large' className="form-container" onSubmit={this.handleSubmit}>
+        <Form size='large' className="form-container" onSubmit={this.handleSubmit} >
           <Segment stacked style={{margin: '1rem',height:'430px',width: '480px'}}>
           <Header as='h3'>帳戶資訊</Header>
           <Form.Field required>
             <label htmlFor="email">E-mail</label>
-            <input type="text" name="email" placeholder="請填入未註冊過的E-mail" onChange={this.handleChange} required="required"
+            <input type="text" name="email" placeholder="請填入未註冊過的E-mail" onChange={this.handleChange} value={this.state.email}required="required"
             />
           </Form.Field>
           <Form.Group widths='equal'>
@@ -151,12 +156,12 @@ class Register extends React.Component{
           content='1. 密碼必須含有至少一個大寫和小寫字母以及一個數字或特殊符號 2. 長度至少超過8個字元'
           position='top left'
         />
-            <input type="password" autoComplete="false" name="passwort" placeholder="請設定符合規格的密碼" onChange={this.handleChange} required/>
+            <input type="password" autoComplete="false" name="passwort" placeholder="請設定符合規格的密碼" onChange={this.handleChange} value={this.state.passwort} required/>
           </Form.Field>
           <Form.Field required>
             <label htmlFor="passwort_wiederholen">確認密碼</label>
             <input type="password" name="passwort_wiederholen"
-            autoComplete="false" placeholder="請再次輸入密碼" onChange={this.handleChange}required/>
+            autoComplete="false" placeholder="請再次輸入密碼" onChange={this.handleChange} value={this.state.passwort_wiederholen} required/>
           </Form.Field>
           </Form.Group>
           <Form.Field required>
@@ -171,28 +176,28 @@ class Register extends React.Component{
           < Form.Group widths='equal'>
           <Form.Field required>
             <label htmlFor="vorname">名字</label>
-            <input type="text" name="vorname" placeholder="" onChange={this.handleChange} required="required"/>
+            <input type="text" name="vorname" placeholder="" onChange={this.handleChange} value={this.state.vorname} required="required"/>
           </Form.Field>
           <Form.Field required>
             <label htmlFor="nachname">姓氏</label>
-            <input type="text" name="nachname" placeholder="" onChange={this.handleChange} required/>
+            <input type="text" name="nachname" placeholder="" onChange={this.handleChange} value={this.state.nachname} required/>
           </Form.Field>
           </Form.Group>
           <Form.Field required>
             <label style={{display:'inline-block'}} htmlFor="str_nr">地址</label>
-            <input type="text" name="str_nr" id="str_nr"  placeholder="請輸入行政區域/街道名/門牌號碼" onChange={this.handleChange} required/>
+            <input type="text" name="str_nr" id="str_nr"  placeholder="請輸入行政區域/街道名/門牌號碼" onChange={this.handleChange} value={this.state.str_nr} required/>
           </Form.Field>
           <Form.Field required>
             <label htmlFor="ort">城市</label>
-            <input type="text" name="ort" placeholder="" onChange={this.handleChange} required/>
+            <input type="text" name="ort" placeholder="" onChange={this.handleChange} value={this.state.ort} required/>
           </Form.Field>
           <Form.Field required>
           <label htmlFor="land">國家</label>
-          <Form.Select name="land" placeholder='國家' options={countryOptions} onChange={this.handleChange}/>
+          <Form.Select name="land" placeholder='國家' options={countryOptions} onChange={this.handleChange} value={this.state.land}/>
           </Form.Field>
           <Form.Field required>
             <label htmlFor="plz">郵遞區號</label>
-            <input type="text" name="plz" placeholder="" onChange={this.handleChange} required/>
+            <input type="text" name="plz" placeholder="" value={this.state.plz}onChange={this.handleChange} required/>
           </Form.Field>
           </Segment>
         <Button style={{width:'200px',margin:'0 200px',backgroundColor:'#000',color:'#fff549'}} className="signin-btn" fluid size='large'

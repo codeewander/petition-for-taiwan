@@ -50,7 +50,6 @@ class SignIn extends React.Component{
     this.setState({
       [name]: value
     });
-    console.log(this.state)
   }
 
   handleRadio = event =>{
@@ -59,7 +58,6 @@ class SignIn extends React.Component{
     this.setState({
       mitzeichnerliste_name: value
     });
-    console.log(this.state)
   }
 
   handleSubmit = event =>{
