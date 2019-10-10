@@ -60,10 +60,10 @@ class Homepage extends React.Component {
       <div className="App-header">
         <h1>自己的外交自己救</h1>
         <div className="reason">德國國會可通過要求德國政府與臺灣建立正式外交關係，請願內容將予以公開後於國會討論，惟其先決條件須在4週內（自2019年9月11日起計至10月10日止）獲得全球5萬人以上之連署。</div>
-        <p className='count-down'><span>倒數</span>{countDownDays} 天 {countDownHours} 小時 {countDownMinutes} 分鐘 </p>
+        <p className='count-down'>連署已截止，謝謝！</p>
           <Link className="petition-button" to="/step1" >開始連署</Link>
         <h3>目前連署人數：{petitionData}</h3>
-        
+
       </div>
     )
 
